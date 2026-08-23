@@ -6,8 +6,9 @@ plugins {
 
 android {
     namespace = "com.humsafar.khoj"
-    compileSdk = 36
-    buildToolsVersion = "36.0.0"
+    compileSdk = 35
+    ndkVersion = "28.2.13676358"
+   
 
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_17
@@ -20,8 +21,8 @@ android {
 
     defaultConfig {
         applicationId = "com.humsafar.khoj"
-        minSdk = 21
-        targetSdk = 36
+        minSdk = flutter.minSdkVersion
+        targetSdk = 35
         versionCode = 1
         versionName = "1.0"
         multiDexEnabled = true
