@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "579485415316",
+    "firebase_url": "https://humsafar-khoj-default-rtdb.firebaseio.com",
+    "project_id": "humsafar-khoj",
+    "storage_bucket": "humsafar-khoj.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:579485415316:android:a3c89c2e8e442fb22f4181",
+        "android_client_info": {
+          "package_name": "com.humsafar.khoj"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "579485415316-ubq9g67iqislfvjv2e3a2a82qe1v7ipi.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA6wqyB8YQzrhBtCf9lw83N02E8JXwZxzA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "579485415316-ubq9g67iqislfvjv2e3a2a82qe1v7ipi.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
