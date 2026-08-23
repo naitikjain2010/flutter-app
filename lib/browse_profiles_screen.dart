@@ -23,8 +23,9 @@ final genders = ['All','Male','Female'];
 int calcAgeAny(dynamic dobData){
 try{
 DateTime? dt;
-if(dobData is Timestamp) dt = dobData.toDate();
-else if(dobData is DateTime) dt = dobData;
+if(dobData is Timestamp) {
+  dt = dobData.toDate();
+} else if(dobData is DateTime) dt = dobData;
 else if(dobData is String && dobData.isNotEmpty){
 final c = dobData.replaceAll('-','/').split('/');
 if(c.length==3) dt = DateTime(int.parse(c[2]), int.parse(c[1]), int.parse(c[0]));
@@ -55,7 +56,7 @@ Future<void> searchProfiles() async {
       if(userAge==0) return true;
       return userAge >= minAge && userAge <= maxAge;
     }).toList();
-    setState(()=>{results = filtered, loading = false});
+    setState((){results = filtered; loading = false;});
   }catch(e){ setState(()=>loading=false); }
 }
 
@@ -64,7 +65,7 @@ void openProfile(Map<String,dynamic> data, String otherUid){
 }
 
 Widget drop(String label, List<String> items, String? val, Function(String?) onChanged){
-  return DropdownButtonFormField<String>(value: val, decoration: InputDecoration(labelText: label, border: OutlineInputBorder(borderRadius: BorderRadius.circular(10))), items: items.map((e)=> DropdownMenuItem(value: e, child: Text(e))).toList(), onChanged: onChanged);
+  return DropdownButtonFormField<String>(initialValue: val, decoration: InputDecoration(labelText: label, border: OutlineInputBorder(borderRadius: BorderRadius.circular(10))), items: items.map((e)=> DropdownMenuItem(value: e, child: Text(e))).toList(), onChanged: onChanged);
 }
 @override
 Widget build(BuildContext context){

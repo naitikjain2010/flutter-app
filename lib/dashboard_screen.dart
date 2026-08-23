@@ -1,4 +1,3 @@
-import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -36,8 +35,9 @@ class _DashboardScreenState extends State<DashboardScreen> {
   int calcAgeFromAny(dynamic dobData) {
     try{
       DateTime? dt;
-      if(dobData is Timestamp) dt = dobData.toDate();
-      else if(dobData is DateTime) dt = dobData;
+      if(dobData is Timestamp) {
+        dt = dobData.toDate();
+      } else if(dobData is DateTime) dt = dobData;
       else if(dobData is String) {
         final c = dobData.replaceAll('-','/').split('/');
         if(c.length==3) dt = DateTime(int.parse(c[2]), int.parse(c[1]), int.parse(c[0]));
@@ -95,9 +95,9 @@ class _DashboardScreenState extends State<DashboardScreen> {
     showDialog(context:context, builder:(ctx)=> StatefulBuilder(builder:(ctx,setSt)=> AlertDialog(title:const Text('Edit Profile'), content:SingleChildScrollView(child:Column(mainAxisSize:MainAxisSize.min, children:[
       TextField(controller:nc, decoration:const InputDecoration(labelText:'Naam')),
       Text('DOB: $dob | Age: $age saal', style: const TextStyle(color: Color(0xFF8E24AA), fontWeight: FontWeight.bold)),
-      DropdownButtonFormField(value:tg, decoration:const InputDecoration(labelText:'Gender'), items:genderList.map((e)=>DropdownMenuItem(value:e, child:Text(e))).toList(), onChanged:(v)=>setSt(()=>tg=v)),
-      DropdownButtonFormField(value:tm, decoration:const InputDecoration(labelText:'Marital'), items:maritalList.map((e)=>DropdownMenuItem(value:e, child:Text(e))).toList(), onChanged:(v)=>setSt(()=>tm=v)),
-      DropdownButtonFormField(value:tr, decoration:const InputDecoration(labelText:'Dharm'), items:religionList.map((e)=>DropdownMenuItem(value:e, child:Text(e))).toList(), onChanged:(v)=>setSt(()=>tr=v)),
+      DropdownButtonFormField(initialValue:tg, decoration:const InputDecoration(labelText:'Gender'), items:genderList.map((e)=>DropdownMenuItem(value:e, child:Text(e))).toList(), onChanged:(v)=>setSt(()=>tg=v)),
+      DropdownButtonFormField(initialValue:tm, decoration:const InputDecoration(labelText:'Marital'), items:maritalList.map((e)=>DropdownMenuItem(value:e, child:Text(e))).toList(), onChanged:(v)=>setSt(()=>tm=v)),
+      DropdownButtonFormField(initialValue:tr, decoration:const InputDecoration(labelText:'Dharm'), items:religionList.map((e)=>DropdownMenuItem(value:e, child:Text(e))).toList(), onChanged:(v)=>setSt(()=>tr=v)),
       TextField(controller:ic, decoration:const InputDecoration(labelText:'Income')), TextField(controller:sc, decoration:const InputDecoration(labelText:'Rajya')), TextField(controller:mc, decoration:const InputDecoration(labelText:'Mobile')), TextField(controller:fc, decoration:const InputDecoration(labelText:'Pita')), TextField(controller:ec, decoration:const InputDecoration(labelText:'Shiksha')), TextField(controller:wc, decoration:const InputDecoration(labelText:'Kaam')), TextField(controller:dc, maxLines:3, decoration:const InputDecoration(labelText:'Description', border:OutlineInputBorder())),
     ])), actions:[TextButton(onPressed:()=>Navigator.pop(ctx), child:const Text('Cancel')), ElevatedButton(onPressed:() async { final uid=FirebaseAuth.instance.currentUser!.uid; await FirebaseFirestore.instance.collection('users').doc(uid).update({'name':nc.text,'gender':tg??gender,'maritalStatus':tm??maritalStatus,'religion':tr??religion,'income':ic.text,'state':sc.text,'village':sc.text,'mobile':mc.text,'fatherName':fc.text,'education':ec.text,'work':wc.text,'description':dc.text,'about':dc.text}); Navigator.pop(ctx); loadData();}, child:const Text('Save'))]))); }
 
